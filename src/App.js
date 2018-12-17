@@ -1,25 +1,33 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { observer, inject } from "mobx-react";
+import ButtonGrid from "./components/ButtonGrid";
+import Header from "./components/Header";
+import Display from "./components/Display";
 
+@inject("store")
+@observer
 class App extends Component {
+  incrementCounter = () => {
+    this.props.store.increment();
+  };
+
+  decrementCounter = () => {
+    this.props.store.decrement();
+  };
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div
+        className="blue lighten-4"
+        style={{
+          height: "100vh"
+        }}
+      >
+        <Header />
+        <div className="center-align">
+          <Display />
+          <ButtonGrid />
+        </div>
       </div>
     );
   }
